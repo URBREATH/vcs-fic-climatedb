@@ -1,6 +1,6 @@
 # Climate DB delivery bundle
 
-This package installs the climate database objects and imports data from a
+This package installs the climate database objects and imports FICLIMA (https://ficlima.org/) climate data from a
 generic folder structure. It is not tied to a specific city. Every direct
 subfolder under `Observations` or `Projections` is treated as a city name, for
 example `Cluj-Napoca`, `Madrid`, or `Tallinn`.
