@@ -22,21 +22,25 @@ example `Cluj-Napoca`, `Madrid`, or `Tallinn`.
   administrator must enable PostGIS in the target database beforehand
 - Firewall, DNS, and, where applicable, TLS certificates must allow the
   machine running this bundle to connect to the PostgreSQL server
-- database server needs a minimum of **10GB free space for storing the climate data per city**
+- The database server needs a minimum of **10 GB of free space per city** for
+  storing the climate data.
 
 This package does not start a PostgreSQL server or create a database. The city
 must provide the host, port, database name, user, and password.
 
 ## Important steps for DB creation
 
-- the database on PostgreSQl server must be created before starting the setup process
-- to create the database use either well known sql commands (`CREATE DATABASE climate-xxx;`, more under https://www.postgresql.org/docs/current/sql-createdatabase.html) or in pgAdmin right click on your server and select create => database
-- provide a valid database name and assign user and priviliges as needed
-- after database creation, select the new created database and create the extension `postgis`
-  - with sql command `CREATE EXTENSION postgis;` more under https://www.postgresql.org/docs/current/sql-createextension.html, OR
-  - in pgAdmin right click on your database, select create => Extension
-  - search for postgis, select it and click `Save`
-- afterwards you can start the setup process
+- The database on the PostgreSQL server must be created before starting setup.
+- To create it, use the standard SQL command `CREATE DATABASE climate_xxx;`
+  or use **Create > Database** in pgAdmin. See the [PostgreSQL
+  documentation](https://www.postgresql.org/docs/current/sql-createdatabase.html).
+- Provide a valid database name and assign the required user privileges.
+- After creating the database, select it and enable the `postgis` extension:
+  - Run `CREATE EXTENSION postgis;` in SQL, as described in the
+    [PostGIS documentation](https://www.postgresql.org/docs/current/sql-createextension.html).
+  - Alternatively, in pgAdmin select **Create > Extension**, choose `postgis`,
+    and click **Save**.
+- You can then start the setup process.
 
 ### Pre-installation check for the database administrator
 
@@ -285,7 +289,7 @@ mean zero climate impact.
 After a successful installation, use the included query script:
 **Replace lat / lon coordinates with values of a location in your city. The given example is a point in Cluj-Napoca. So it won't work in any other city!!**
 
-**Also see the information beloew regrading the .env-file**
+See the [`.env` configuration](#using-the-database) information above.
 
 ```powershell
 python query_climate.py --env .env --lon 23.5667 --lat 46.7831 \
@@ -319,8 +323,8 @@ The setup process will automatically import the climate observation and projecti
 Observations and projections are stored in the same tables. Flat observation
 files receive the following reference values:
 
-- Modell: `ERA5`
-- Szenario: `ERA5_Observed`
+- Model: `ERA5`
+- Scenario: `ERA5_Observed`
 - `is_reference`: `true`
 
 Projection model and scenario names are preserved from their folders. The
@@ -568,5 +572,3 @@ Period and annual CWB rows contain `total_et0_mm`, `total_precip_mm`,
 Derived ET0 and CWB attributes are `null` when the required scalar inputs are
 missing for that exact station, model, scenario, or date. This represents an
 unavailable calculation; it is not an initialized zero value.
-#   v c s - f i c - c l i m a t e d b  
- 
