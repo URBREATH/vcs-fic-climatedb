@@ -1,6 +1,6 @@
 # Climate DB delivery bundle
 
-**Provided by:** Not specified in the provided documentation.
+**Provided by:** virtualcitySYSTEMS based on FICLIMA data
 
 ## Description
 
